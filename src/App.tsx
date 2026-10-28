@@ -1,33 +1,37 @@
 import { useState } from "react"
 import type { OsztalyAdatok_interface } from "./Models/Interfaces/OsztalyAdatok.interface"
 import { OsztalyAdatok } from "./Components/OsztalyAdatok/OsztalyAdatok"
+import { OsztalyVezerlo } from "./Components/OsztalyVezerlo/OsztalyVezerlo"
 export const App = function () {
     const [jelenlevok, setJelenlevok] = useState<OsztalyAdatok_interface["jelenlevok"]>(24)
     const [hangulat, setHangulat] = useState<OsztalyAdatok_interface["hangulat"]>("Atlagos")
 
-    const jelenlegNoveles = function() {
-        setJelenlevok(jelenlevok+1)
+    const jelenlegNoveles = function () {
+        setJelenlevok(jelenlevok + 1)
     }
 
     const jelenletCsokkentes = function () {
-        setJelenlevok(jelenlevok-1)
+        setJelenlevok(jelenlevok - 1)
     }
 
     // Ezt kicsit tulbonyolitottam veletlenul, de mostmar igy marad
     const hangulatValtoztatas = function () {
-        const hangulatLehetosegek:OsztalyAdatok_interface["hangulat"][] = ["Atlagos", "Jo", "Kivalo"];
-        for(let i = 0; i < hangulatLehetosegek.length; i++) {
-            const hangulatLehetoseg:OsztalyAdatok_interface["hangulat"] = hangulatLehetosegek[i];
+        const hangulatLehetosegek: OsztalyAdatok_interface["hangulat"][] = ["Atlagos", "Jo", "Kivalo"];
+        for (let i = 0; i < hangulatLehetosegek.length; i++) {
+            const hangulatLehetoseg: OsztalyAdatok_interface["hangulat"] = hangulatLehetosegek[i];
             if (hangulat == hangulatLehetoseg) {
-                if (hangulat  == "Kivalo") {
+                if (hangulat == "Kivalo") {
                     setHangulat(hangulatLehetosegek[0])
                 } else {
-                    setHangulat(hangulatLehetosegek[i+1])
+                    setHangulat(hangulatLehetosegek[i + 1])
                 }
-            }   
+            }
         }
     }
     return (
-            <OsztalyAdatok jelenlevok={jelenlevok} hangulat={hangulat}/>
+        <>
+            <OsztalyAdatok jelenlevok={jelenlevok} hangulat={hangulat} />
+            <OsztalyVezerlo jelenletNoveles={jelenlegNoveles} jelenletCsokkentese={jelenletCsokkentes} hangulatValtoztatas={hangulatValtoztatas}></OsztalyVezerlo>
+        </>
     )
 }
