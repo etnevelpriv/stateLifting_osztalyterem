@@ -1,4 +1,4 @@
-export interface OsztalyAdatok {
+export interface OsztalyAdatok_interface {
     jelenlevok: number;
     hangulat: "Atlagos" | "Jo" | "Kivalo";
 }
